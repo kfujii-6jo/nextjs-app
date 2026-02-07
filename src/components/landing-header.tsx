@@ -1,8 +1,8 @@
 "use client";
 
-import { Logo } from "@/components/logo";
 import { Container } from "@/components/container";
 import { LandingHeaderNav } from "@/components/landing-header-nav";
+import { Logo } from "@/components/logo";
 
 export const LandingHeader = () => {
   return (
