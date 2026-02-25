@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { Container } from "@/components/container";
 import { Button } from "@/components/ui/button";
+import { useLoginModal } from "@/features/auth/hooks/use-login-modal";
 
 export const Hero = () => {
+  const { open } = useLoginModal();
   return (
     <div className="pt-16 md:pt-32 pb-32 bg-neutral-100">
       <Container className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -25,7 +27,7 @@ export const Hero = () => {
             あなたの知見を共有し、他のエンジニアの知見を学びましょう。
           </p>
           <div className="mt-2 sm:mt-12">
-            <Button onClick={() => {}} size="lg">
+            <Button onClick={open} size="lg">
               無料で始める
             </Button>
           </div>

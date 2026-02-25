@@ -2,8 +2,11 @@
 
 import { Container } from "@/components/container";
 import { Button } from "@/components/ui/button";
+import { useLoginModal } from "@/features/auth/hooks/use-login-modal";
 
 export const CallToAction = () => {
+  const { open } = useLoginModal();
+
   return (
     <div className="bg-neutral-100">
       <Container className="py-32 md:py-40 text-center">
@@ -15,7 +18,7 @@ export const CallToAction = () => {
           今すぐTechShareで技術記事の共有を始めましょう。
         </p>
         <div className="mt-8">
-          <Button size="lg" onClick={() => {}}>
+          <Button size="lg" onClick={open}>
             無料で始める
           </Button>
         </div>
