@@ -42,3 +42,9 @@ jobs:
         run: npm run build
         env:
           DATABASE_URL: postgres://dummy:dummy@localhost:5432/dummy
+          AUTH_SECRET: dummy_secret_for_ci_build
+          NEXTAUTH_URL: http://localhost:3000
+          GOOGLE_ID: dummy_google_id
+          GOOGLE_SECRET: dummy_google_secret
+          GITHUB_ID: dummy_github_id
+          GITHUB_SECRET: dummy_github_secret

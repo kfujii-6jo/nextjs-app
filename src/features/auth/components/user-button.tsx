@@ -1,7 +1,7 @@
 "use client";
 
 import { Loader2, LogOut } from "lucide-react";
-
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 import { logout } from "@/features/auth/actions";
 import { useGetCurrent } from "@/features/auth/api/use-get-current";

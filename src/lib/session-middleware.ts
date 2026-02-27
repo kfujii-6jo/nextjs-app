@@ -1,5 +1,5 @@
-import { Session } from "next-auth";
 import { createMiddleware } from "hono/factory";
+import type { Session } from "next-auth";
 
 import { auth } from "@/auth";
 

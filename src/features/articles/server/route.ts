@@ -1,11 +1,11 @@
-import { Hono } from "hono";
-import { eq } from "drizzle-orm";
 import { zValidator } from "@hono/zod-validator";
+import { eq } from "drizzle-orm";
+import { Hono } from "hono";
 
 import { db } from "@/db";
 import { articles } from "@/db/schema";
-import { sessionMiddleware } from "@/lib/session-middleware";
 import { updateArticleSchema } from "@/features/articles/schemas";
+import { sessionMiddleware } from "@/lib/session-middleware";
 
 const app = new Hono()
   /**
@@ -20,7 +20,7 @@ const app = new Hono()
       .where(eq(articles.id, articleId));
 
     if (!article) {
-      return c.json({ message: "記事が見つかりません : " + articleId }, 404);
+      return c.json({ message: `記事が見つかりません : ${articleId}` }, 404);
     }
 
     return c.json({ data: article });
@@ -28,10 +28,14 @@ const app = new Hono()
   .post("/", sessionMiddleware, async (c) => {
     const session = c.get("session");
 
+    if (!session.user?.id) {
+      return c.json({ message: "認証が必要です" }, 401);
+    }
+
     const [article] = await db
       .insert(articles)
       .values({
-        authorId: session.user?.id!,
+        authorId: session.user.id,
       })
       .returning();
 
@@ -55,12 +59,12 @@ const app = new Hono()
         .where(eq(articles.id, articleId));
 
       if (!article) {
-        return c.json({ message: "記事が見つかりません : " + articleId }, 404);
+        return c.json({ message: `記事が見つかりません : ${articleId}` }, 404);
       }
 
       if (article.authorId !== session.user?.id) {
         return c.json(
-          { message: "記事の編集権限がありません" + articleId },
+          { message: `記事の編集権限がありません${articleId}` },
           403,
         );
       }

@@ -1,6 +1,6 @@
-import { toast } from "sonner";
-import { InferRequestType, InferResponseType } from "hono/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { InferRequestType, InferResponseType } from "hono/client";
+import { toast } from "sonner";
 
 import { client } from "@/lib/rpc";
 
@@ -17,7 +17,7 @@ export const useUpdateArticle = () => {
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ json, param }) => {
-      const response = await client.api.articles[":article_id"]["$patch"]({
+      const response = await client.api.articles[":article_id"].$patch({
         json,
         param,
       });
